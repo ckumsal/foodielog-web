@@ -62,6 +62,7 @@ export default async function DishSharePage({ params }: DishSharePageProps) {
   if (dish.source === "fallback") {
     console.log(`[WebDishShareDebug] fallback_share_rendered dish_id=${id}`);
   }
+  console.log("[WebDishShareDebug] hero_image_render_mode=next_image_unoptimized");
 
   return (
     <main className="min-h-screen bg-[#0a0908] text-stone-50">
@@ -73,6 +74,7 @@ export default async function DishSharePage({ params }: DishSharePageProps) {
             fill
             priority
             sizes="100vw"
+            unoptimized
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/90" />
