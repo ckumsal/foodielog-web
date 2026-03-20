@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "V96X8DT2ES.com.ckumsal.FoodieLog",
+        "paths": [
+          "/dish/*"
+        ]
+      }
+    ]
+  }
+}
