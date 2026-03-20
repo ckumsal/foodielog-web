@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { getMockDishShareRecord } from "@/lib/mockDishShareData";
+import {
+  findMockDishShareRecord,
+  getMockDishShareRecord,
+} from "@/lib/mockDishShareData";
+
+export const dynamicParams = true;
 
 type DishSharePageProps = {
   params: Promise<{
@@ -13,7 +18,9 @@ export async function generateMetadata({
 }: DishSharePageProps): Promise<Metadata> {
   const { id } = await params;
   const dish = getMockDishShareRecord(id);
-  const description = `${dish.restaurantName} · ${dish.city}`;
+  const description = [dish.restaurantName, dish.city]
+    .filter(Boolean)
+    .join(" · ") || "Discovered on FoodieLog";
 
   return {
     title: dish.dishName,
@@ -44,7 +51,16 @@ export async function generateMetadata({
 export default async function DishSharePage({ params }: DishSharePageProps) {
   const { id } = await params;
   const dish = getMockDishShareRecord(id);
-  const locationLabel = `${dish.city}, ${dish.country}`;
+  const knownMockDish = findMockDishShareRecord(id);
+  const locationLabel = [dish.city, dish.country].filter(Boolean).join(", ");
+  const contextLine =
+    dish.tagline ??
+    (dish.userDisplayName && dish.city
+      ? `${dish.userDisplayName}'s pick in ${dish.city}`
+      : "Discovered on FoodieLog");
+  const identityLine = [dish.userDisplayName, dish.culinaryRank, dish.hook]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <main className="min-h-screen bg-[#0a0908] text-stone-50">
@@ -70,12 +86,18 @@ export default async function DishSharePage({ params }: DishSharePageProps) {
                 {dish.dishName}
               </h1>
 
-              <div className="mt-4 space-y-1.5">
-                <p className="text-base font-medium text-white/90">
-                  {dish.restaurantName}
-                </p>
-                <p className="text-sm text-white/68">{locationLabel}</p>
-              </div>
+              {(dish.restaurantName || locationLabel) && (
+                <div className="mt-4 space-y-1.5">
+                  {dish.restaurantName && (
+                    <p className="text-base font-medium text-white/90">
+                      {dish.restaurantName}
+                    </p>
+                  )}
+                  {locationLabel && (
+                    <p className="text-sm text-white/68">{locationLabel}</p>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -83,14 +105,21 @@ export default async function DishSharePage({ params }: DishSharePageProps) {
         <section className="flex flex-1 flex-col gap-6 px-5 py-6 sm:px-6">
           <div className="space-y-2">
             <p className="text-base leading-6 text-stone-100/88">
-              {dish.tagline ?? `${dish.userDisplayName}'s pick in ${dish.city}`}
+              {contextLine}
             </p>
 
-            <p className="text-sm leading-6 text-stone-300/74">
-              {dish.userDisplayName}
-              {dish.culinaryRank ? ` · ${dish.culinaryRank}` : ""}
-              {dish.hook ? ` · ${dish.hook}` : ""}
-            </p>
+            {identityLine && (
+              <p className="text-sm leading-6 text-stone-300/74">
+                {identityLine}
+              </p>
+            )}
+
+            {!knownMockDish && (
+              <p className="text-sm leading-6 text-stone-400/68">
+                A dish page is ready here while live share data is still being
+                connected.
+              </p>
+            )}
           </div>
 
           <a

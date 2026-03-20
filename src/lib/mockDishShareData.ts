@@ -1,14 +1,15 @@
 export type MockDishShareRecord = {
   id: string;
   dishName: string;
-  restaurantName: string;
-  city: string;
-  country: string;
+  restaurantName?: string;
+  city?: string;
+  country?: string;
   imageUrl: string;
-  userDisplayName: string;
+  userDisplayName?: string;
   culinaryRank?: string;
   tagline?: string;
   hook?: string;
+  isFallback?: boolean;
 };
 
 const mockDishShareRecords: Record<string, MockDishShareRecord> = {
@@ -40,20 +41,22 @@ const mockDishShareRecords: Record<string, MockDishShareRecord> = {
   },
 };
 
+export function findMockDishShareRecord(id: string): MockDishShareRecord | null {
+  return mockDishShareRecords[id] ?? null;
+}
+
+export function makeFallbackDishShareRecord(id: string): MockDishShareRecord {
+  return {
+    id,
+    dishName: "Memorable dish",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80",
+    tagline: "Discovered on FoodieLog",
+    hook: "Worth remembering",
+    isFallback: true,
+  };
+}
+
 export function getMockDishShareRecord(id: string): MockDishShareRecord {
-  return (
-    mockDishShareRecords[id] ?? {
-      id,
-      dishName: "Chef's Special Pasta",
-      restaurantName: "Luna Trattoria",
-      city: "Rome",
-      country: "Italy",
-      imageUrl:
-        "https://images.unsplash.com/photo-1516100882582-96c3a05fe590?auto=format&fit=crop&w=1600&q=80",
-      userDisplayName: "FoodieLog",
-      culinaryRank: "Dish Explorer",
-      tagline: "A memorable pick on FoodieLog",
-      hook: "Worth trying",
-    }
-  );
+  return findMockDishShareRecord(id) ?? makeFallbackDishShareRecord(id);
 }
