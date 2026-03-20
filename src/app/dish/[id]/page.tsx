@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import {
-  findMockDishShareRecord,
-  getMockDishShareRecord,
-} from "@/lib/mockDishShareData";
+import { getDishShareDataById } from "@/lib/getDishShareDataById";
 
 export const dynamicParams = true;
+export const dynamic = "force-dynamic";
 
 type DishSharePageProps = {
   params: Promise<{
@@ -17,7 +15,7 @@ export async function generateMetadata({
   params,
 }: DishSharePageProps): Promise<Metadata> {
   const { id } = await params;
-  const dish = getMockDishShareRecord(id);
+  const dish = await getDishShareDataById(id);
   const description = [dish.restaurantName, dish.city]
     .filter(Boolean)
     .join(" · ") || "Discovered on FoodieLog";
@@ -50,8 +48,7 @@ export async function generateMetadata({
 
 export default async function DishSharePage({ params }: DishSharePageProps) {
   const { id } = await params;
-  const dish = getMockDishShareRecord(id);
-  const knownMockDish = findMockDishShareRecord(id);
+  const dish = await getDishShareDataById(id);
   const locationLabel = [dish.city, dish.country].filter(Boolean).join(", ");
   const contextLine =
     dish.tagline ??
@@ -61,6 +58,10 @@ export default async function DishSharePage({ params }: DishSharePageProps) {
   const identityLine = [dish.userDisplayName, dish.culinaryRank, dish.hook]
     .filter(Boolean)
     .join(" · ");
+
+  if (dish.source === "fallback") {
+    console.log(`[WebDishShareDebug] fallback_share_rendered dish_id=${id}`);
+  }
 
   return (
     <main className="min-h-screen bg-[#0a0908] text-stone-50">
@@ -114,7 +115,7 @@ export default async function DishSharePage({ params }: DishSharePageProps) {
               </p>
             )}
 
-            {!knownMockDish && (
+            {dish.source === "fallback" && (
               <p className="text-sm leading-6 text-stone-400/68">
                 A dish page is ready here while live share data is still being
                 connected.
