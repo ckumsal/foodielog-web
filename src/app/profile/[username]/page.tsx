@@ -56,6 +56,10 @@ export default async function ProfileSharePage({
 }: ProfileSharePageProps) {
   const { username } = await params;
   const profile = await getProfileShareDataByUsername(username);
+  const requestedPath = `/profile/${username}`;
+  console.log(
+    `[WebProfileUniversalLinkDebug] profile_request_received path=${requestedPath}`,
+  );
   console.log("[WebProfileShareDebug] hero_image_render_mode=html_img");
 
   if (profile.source === "fallback") {
@@ -63,6 +67,12 @@ export default async function ProfileSharePage({
       `[WebProfileShareDebug] fallback_profile_rendered username=${username}`,
     );
   }
+  console.log(
+    `[WebProfileUniversalLinkDebug] profile_direct_render username=${username}`,
+  );
+  console.log(
+    `[WebProfileUniversalLinkDebug] profile_response_completed username=${username}`,
+  );
 
   return (
     <main className="min-h-screen bg-[#0a0908] text-stone-50">
