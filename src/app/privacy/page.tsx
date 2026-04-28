@@ -9,11 +9,20 @@ export default function PrivacyPage() {
     >
       <LegalSection title="Information We Collect">
         <ul className="list-disc space-y-2 pl-6">
-          <li>Account information, such as your Apple Sign In identifier and profile details.</li>
-          <li>Dish posts you create, including dish names, restaurant information, photos, and notes.</li>
+          <li>
+            Account information, such as your Apple Sign In identifier and
+            profile details.
+          </li>
+          <li>
+            Dish posts you create, including dish names, restaurant information,
+            photos, and notes.
+          </li>
           <li>Location information when you allow location access.</li>
           <li>Photos you choose to upload or select.</li>
-          <li>App usage information, such as saved dishes, follows, and interactions.</li>
+          <li>
+            App usage information, such as saved dishes, follows, and
+            interactions.
+          </li>
         </ul>
       </LegalSection>
 
@@ -43,7 +52,10 @@ export default function PrivacyPage() {
       <LegalSection title="Account Deletion">
         <p>
           You can request account deletion or data removal by contacting{" "}
-          <a href="mailto:support@foodielog.app" className="text-[#42E8C6] underline">
+          <a
+            href="mailto:support@foodielog.app"
+            className="text-[#42E8C6] underline"
+          >
             support@foodielog.app
           </a>
           .
@@ -53,13 +65,18 @@ export default function PrivacyPage() {
       <LegalSection title="Contact">
         <p>
           Questions? Email{" "}
-          <a href="mailto:support@foodielog.app" className="text-[#42E8C6] underline">
+          <a
+            href="mailto:support@foodielog.app"
+            className="text-[#42E8C6] underline"
+          >
             support@foodielog.app
           </a>
           .
         </p>
       </LegalSection>
     </LegalPage>
+  );
+}    </LegalPage>
   );
 }          Dish posts, profile information, and activity may be visible to other
           users depending on app features and your use of FoodieLog. Do not post
