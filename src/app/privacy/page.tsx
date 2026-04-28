@@ -76,6 +76,19 @@ export default function PrivacyPage() {
       </LegalSection>
     </LegalPage>
   );
+}        <p>
+          Questions? Email{" "}
+          <a
+            href="mailto:support@foodielog.app"
+            className="text-[#42E8C6] underline"
+          >
+            support@foodielog.app
+          </a>
+          .
+        </p>
+      </LegalSection>
+    </LegalPage>
+  );
 }    </LegalPage>
   );
 }          Dish posts, profile information, and activity may be visible to other
