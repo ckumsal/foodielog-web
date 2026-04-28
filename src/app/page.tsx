@@ -220,15 +220,21 @@ export default function Home() {
           </a>
         </section>
 
-        <footer className="flex flex-col gap-4 border-t border-white/10 py-8 text-sm text-white/45 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 FoodieLog. All rights reserved.</p>
+  <footer className="mt-24 py-10 text-center text-sm text-white/50">
+  <div className="space-x-4">
+    <a href="/privacy" className="hover:text-white transition">
+      Privacy Policy
+    </a>
+    <span>·</span>
+    <a href="/support" className="hover:text-white transition">
+      Support
+    </a>
+  </div>
 
-          <div className="flex gap-5">
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-            <a href="/support">Support</a>
-          </div>
-        </footer>
+  <div className="mt-4 text-xs text-white/30">
+    © 2026 FoodieLog
+  </div>
+</footer>
       </div>
     </main>
   );
