@@ -19,7 +19,13 @@ export default function SupportPage() {
             support@foodielog.app
           </a>
         </p>
-
+<p className="text-white/70 mt-6">
+  Read our{" "}
+  <a href="/privacy" className="text-[#42E8C6] underline">
+    Privacy Policy
+  </a>
+  .
+</p>
         <h2 className="text-xl font-semibold mb-2">Account & Data</h2>
         <p className="text-white/70 mb-6">
           To request account deletion or data removal, please contact us from
