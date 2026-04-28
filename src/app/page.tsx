@@ -53,13 +53,14 @@ export default function Home() {
 
             <div className="mt-9 flex flex-wrap gap-4">
               <a
-                href="https://apps.apple.com/app/id6760375479"
-                className="rounded-full bg-[#42E8C6] px-6 py-4 font-bold text-[#07110F]"
+              href="https://apps.apple.com/app/idYOUR_APP_ID"
+              className="rounded-full bg-[#42E8C6] px-6 py-4 font-bold text-[#07110F]"
               >
-                Download on the App Store
+              Get FoodieLog
               </a>
-<p className="mt-3 text-sm text-white/50">
-No ads. Just great food.
+
+<p className="text-sm text-white/50 ml-3">
+  No ads. Just great food.
 </p>
               <a
                 href="#features"
