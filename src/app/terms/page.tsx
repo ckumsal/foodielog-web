@@ -18,7 +18,7 @@ export default function TermsPage() {
           <h2 className="text-xl font-semibold mb-3">Using FoodieLog</h2>
           <p className="text-white/70">
             You can use FoodieLog to share dishes, explore recommendations, and
-            save your culinary experiences. Please don’t misuse the app,
+            save your culinary experiences. Please do not misuse the app,
             including posting misleading content, spam, or anything harmful to
             others.
           </p>
@@ -36,15 +36,15 @@ export default function TermsPage() {
         <section className="mb-10">
           <h2 className="text-xl font-semibold mb-3">Accounts</h2>
           <p className="text-white/70">
-            You’re responsible for your account and activity. If you believe your
-            account has been compromised, please contact us immediately.
+            You are responsible for your account and activity. If you believe
+            your account has been compromised, please contact us immediately.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-xl font-semibold mb-3">Service Availability</h2>
           <p className="text-white/70">
-            We aim to keep FoodieLog running smoothly, but we can’t guarantee
+            We aim to keep FoodieLog running smoothly, but we cannot guarantee
             uninterrupted service. Features may change or improve over time.
           </p>
         </section>
@@ -52,7 +52,7 @@ export default function TermsPage() {
         <section className="mb-10">
           <h2 className="text-xl font-semibold mb-3">Responsibility</h2>
           <p className="text-white/70">
-            FoodieLog helps you discover dishes, but we don’t guarantee the
+            FoodieLog helps you discover dishes, but we do not guarantee the
             quality, safety, or availability of food or restaurants. Always use
             your own judgment when choosing where to eat.
           </p>
@@ -60,6 +60,31 @@ export default function TermsPage() {
 
         <section className="mb-10">
           <h2 className="text-xl font-semibold mb-3">Contact</h2>
+          <p className="text-white/70">
+            Questions about these terms? Contact us at{" "}
+            <a
+              href="mailto:support@foodielog.app"
+              className="text-[#42E8C6] hover:underline"
+            >
+              support@foodielog.app
+            </a>
+            .
+          </p>
+        </section>
+
+        <div className="pt-6 border-t border-white/10 text-sm text-white/50">
+          <a href="/privacy" className="hover:text-white transition">
+            Privacy Policy
+          </a>
+          <span className="mx-3">·</span>
+          <a href="/support" className="hover:text-white transition">
+            Support
+          </a>
+        </div>
+      </div>
+    </main>
+  );
+}          <h2 className="text-xl font-semibold mb-3">Contact</h2>
           <p className="text-white/70">
             Questions about these terms? Contact us at{" "}
             <a
