@@ -49,8 +49,7 @@ export default function Home() {
               FoodieLog helps you recognize, remember, and discover the best
               dishes around you. Not just restaurants, the actual dishes worth
               eating.
-              No ads. Just great food.
-            </p>
+                </p>
 
             <div className="mt-9 flex flex-wrap gap-4">
               <a
@@ -59,7 +58,9 @@ export default function Home() {
               >
                 Download on the App Store
               </a>
-
+<p className="mt-3 text-sm text-white/50">
+No ads. Just great food.
+</p>
               <a
                 href="#features"
                 className="rounded-full border border-white/15 bg-white/5 px-6 py-4 font-bold text-white"
