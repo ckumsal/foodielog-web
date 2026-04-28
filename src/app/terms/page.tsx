@@ -1,10 +1,14 @@
 export default function TermsPage() {
   return (
     <main className="min-h-screen bg-[#0F0F10] px-6 py-20 text-white">
-      <article className="mx-auto max-w-2xl">
-        <h1 className="mb-6 text-4xl font-bold">FoodieLog Terms of Service</h1>
+      <div className="mx-auto max-w-2xl">
+        <h1 className="mb-6 text-4xl font-bold">
+          FoodieLog Terms of Service
+        </h1>
 
-        <p className="mb-10 text-white/60">Last updated: April 2026</p>
+        <p className="mb-10 text-white/60">
+          Last updated: April 2026
+        </p>
 
         <p className="mb-10 text-white/70">
           FoodieLog is designed to help you discover and remember great dishes.
@@ -58,7 +62,7 @@ export default function TermsPage() {
           .
         </p>
 
-        <footer className="border-t border-white/10 pt-6 text-sm text-white/50">
+        <div className="border-t border-white/10 pt-6 text-sm text-white/50">
           <a href="/privacy" className="transition hover:text-white">
             Privacy Policy
           </a>
@@ -66,84 +70,8 @@ export default function TermsPage() {
           <a href="/support" className="transition hover:text-white">
             Support
           </a>
-        </footer>
-      </article>
-    </main>
-  );
-}          <h2 className="text-xl font-semibold mb-3">Contact</h2>
-          <p className="text-white/70">
-            Questions about these terms? Contact us at{" "}
-            <a
-              href="mailto:support@foodielog.app"
-              className="text-[#42E8C6] hover:underline"
-            >
-              support@foodielog.app
-            </a>
-            .
-          </p>
-        </section>
-
-        <div className="pt-6 border-t border-white/10 text-sm text-white/50">
-          <a href="/privacy" className="hover:text-white transition">
-            Privacy Policy
-          </a>
-          <span className="mx-3">·</span>
-          <a href="/support" className="hover:text-white transition">
-            Support
-          </a>
         </div>
       </div>
     </main>
-  );
-}          <h2 className="text-xl font-semibold mb-3">Contact</h2>
-          <p className="text-white/70">
-            Questions about these terms? Contact us at{" "}
-            <a
-              href="mailto:support@foodielog.app"
-              className="text-[#42E8C6] hover:underline"
-            >
-              support@foodielog.app
-            </a>
-          </p>
-        </section>
-
-        <div className="pt-6 border-t border-white/10 text-sm text-white/50">
-          <a href="/privacy" className="hover:text-white transition">
-            Privacy Policy
-          </a>
-          <span className="mx-3">·</span>
-          <a href="/support" className="hover:text-white transition">
-            Support
-          </a>
-        </div>
-      </div>
-    </main>
-  );
-}          safety, or availability of food or restaurants. Always use your own
-          judgment when choosing where to eat.
-        </p>
-      </section>
-
-      {/* CONTACT */}
-      <section className="mb-10">
-        <h2 className="text-xl font-semibold mb-3">Contact</h2>
-        <p className="text-white/70">
-          Questions about these terms? Contact us at{" "}
-          <a
-            href="mailto:support@foodielog.app"
-            className="text-[#42E8C6] hover:underline"
-          >
-            support@foodielog.app
-          </a>
-        </p>
-      </section>
-
-      {/* FOOTER */}
-      <div className="pt-6 border-t border-white/10 text-sm text-white/50">
-        <a href="/privacy" className="hover:text-white transition">
-          Privacy Policy
-        </a>
-      </div>
-    </div>
   );
 }
