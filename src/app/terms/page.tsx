@@ -1,65 +1,48 @@
+import LegalPage, { LegalSection } from "../components/LegalPage";
+
 export default function TermsPage() {
   return (
-    <main className="min-h-screen bg-[#0F0F10] px-6 py-20 text-white">
-      <div className="mx-auto max-w-2xl">
-        <h1 className="mb-6 text-4xl font-bold">
-          FoodieLog Terms of Service
-        </h1>
-
-        <p className="mb-10 text-white/60">
-          Last updated: April 2026
+    <LegalPage
+      title="FoodieLog Terms of Service"
+      updated="April 2026"
+      intro="FoodieLog is designed to help you discover and remember great dishes. By using the app, you agree to keep things respectful, authentic, and enjoyable for everyone."
+    >
+      <LegalSection title="Using FoodieLog">
+        <p>
+          You can use FoodieLog to share dishes, explore recommendations, and save
+          your culinary experiences. Please do not misuse the app, including posting
+          misleading content, spam, or anything harmful to others.
         </p>
+      </LegalSection>
 
-        <p className="mb-10 text-white/70">
-          FoodieLog is designed to help you discover and remember great dishes.
-          By using the app, you agree to keep things respectful, authentic, and
-          enjoyable for everyone.
-        </p>
-
-        <h2 className="mb-3 text-xl font-semibold">Using FoodieLog</h2>
-        <p className="mb-10 text-white/70">
-          You can use FoodieLog to share dishes, explore recommendations, and
-          save your culinary experiences. Please do not misuse the app,
-          including posting misleading content, spam, or anything harmful to
-          others.
-        </p>
-
-        <h2 className="mb-3 text-xl font-semibold">Your Content</h2>
-        <p className="mb-10 text-white/70">
+      <LegalSection title="Your Content">
+        <p>
           You own the content you post, including photos and dish entries. By
           sharing it on FoodieLog, you allow us to display it within the app and
           improve the experience for other users.
         </p>
+      </LegalSection>
 
-        <h2 className="mb-3 text-xl font-semibold">Accounts</h2>
-        <p className="mb-10 text-white/70">
-          You are responsible for your account and activity. If you believe your
-          account has been compromised, please contact us immediately.
+      <LegalSection title="Responsibility">
+        <p>
+          FoodieLog helps you discover dishes, but we do not guarantee the quality,
+          safety, or availability of food or restaurants. Always use your own
+          judgment when choosing where to eat.
         </p>
+      </LegalSection>
 
-        <h2 className="mb-3 text-xl font-semibold">Service Availability</h2>
-        <p className="mb-10 text-white/70">
-          We aim to keep FoodieLog running smoothly, but we cannot guarantee
-          uninterrupted service. Features may change or improve over time.
-        </p>
-
-        <h2 className="mb-3 text-xl font-semibold">Responsibility</h2>
-        <p className="mb-10 text-white/70">
-          FoodieLog helps you discover dishes, but we do not guarantee the
-          quality, safety, or availability of food or restaurants. Always use
-          your own judgment when choosing where to eat.
-        </p>
-
-        <h2 className="mb-3 text-xl font-semibold">Contact</h2>
-        <p className="mb-10 text-white/70">
+      <LegalSection title="Contact">
+        <p>
           Questions about these terms? Contact us at{" "}
-          <a
-            href="mailto:support@foodielog.app"
-            className="text-[#42E8C6] hover:underline"
-          >
+          <a href="mailto:support@foodielog.app" className="text-[#42E8C6] underline">
             support@foodielog.app
           </a>
           .
+        </p>
+      </LegalSection>
+    </LegalPage>
+  );
+}          .
         </p>
 
         <div className="border-t border-white/10 pt-6 text-sm text-white/50">
