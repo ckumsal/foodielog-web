@@ -41,18 +41,20 @@ export default function Home() {
             </p>
 
             <h1 className="max-w-3xl text-6xl font-black leading-[0.95] tracking-[-0.07em] md:text-8xl">
-              Know what you’re eating — instantly.
+              Know what you’re eating. 
+              Instantly.
             </h1>
 
             <p className="mt-7 max-w-xl text-xl leading-8 text-white/70">
               FoodieLog helps you recognize, remember, and discover the best
-              dishes around you. Not just restaurants — the actual dishes worth
+              dishes around you. Not just restaurants, the actual dishes worth
               eating.
+              No ads. Just great food.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-4">
               <a
-                href="#"
+                href="https://apps.apple.com/app/id6760375479"
                 className="rounded-full bg-[#42E8C6] px-6 py-4 font-bold text-[#07110F]"
               >
                 Download on the App Store
