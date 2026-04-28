@@ -59,9 +59,9 @@ export default function Home() {
               Get FoodieLog
               </a>
 
-<p className="mt-3 text-base font-medium text-white/70">
+<p className="mt-3 text-lg font-semibold text-[#42E8C6]">
   No ads. Just great food.
-</p>>
+</p>
               <a
                 href="#features"
                 className="rounded-full border border-white/15 bg-white/5 px-6 py-4 font-bold text-white"
