@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://foodielog.app"),
-  title: "FoodieLog",
-  description: "Track and share the dishes worth remembering.",
+  title: "FoodieLog - Public Dish Map",
+  description: "Explore public dishes saved by FoodieLog users around the world.",
 };
 
 export default function RootLayout({

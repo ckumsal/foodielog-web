@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { getDishShareDataById } from "@/lib/getDishShareDataById";
+import Link from "next/link";
+import { getPublicMapDish } from "@/lib/publicMapDishes";
 
 export const dynamicParams = true;
 export const dynamic = "force-dynamic";
@@ -11,128 +12,132 @@ type DishSharePageProps = {
   }>;
 };
 
+const APP_STORE_URL =
+  process.env.NEXT_PUBLIC_APP_STORE_URL ??
+  "https://apps.apple.com/us/app/foodielog/id6736481989";
+
 export async function generateMetadata({
   params,
 }: DishSharePageProps): Promise<Metadata> {
   const { id } = await params;
-  const dish = await getDishShareDataById(id);
-  const description = [dish.restaurantName, dish.city]
-    .filter(Boolean)
-    .join(" · ") || "Discovered on FoodieLog";
+  const dish = await getPublicMapDish(id);
+
+  if (!dish) {
+    return {
+      title: "Dish not found",
+      description: "This public FoodieLog dish is not available.",
+    };
+  }
+
+  const description =
+    [dish.restaurant_name, dish.city, dish.country].filter(Boolean).join(" · ") ||
+    "Discovered on FoodieLog";
 
   return {
-    title: dish.dishName,
+    title: `${dish.dish_name} at ${dish.restaurant_name}`,
     description,
     openGraph: {
-      title: dish.dishName,
+      title: `${dish.dish_name} at ${dish.restaurant_name}`,
       description,
       url: `/dish/${id}`,
       type: "website",
       images: [
         {
-          url: dish.imageUrl,
+          url: dish.photo_url,
           width: 1600,
           height: 1200,
-          alt: dish.dishName,
+          alt: dish.dish_name,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: dish.dishName,
+      title: `${dish.dish_name} at ${dish.restaurant_name}`,
       description,
-      images: [dish.imageUrl],
+      images: [dish.photo_url],
     },
   };
 }
 
 export default async function DishSharePage({ params }: DishSharePageProps) {
   const { id } = await params;
-  const dish = await getDishShareDataById(id);
-  const locationLabel = [dish.city, dish.country].filter(Boolean).join(", ");
-  const contextLine =
-    dish.tagline ??
-    (dish.userDisplayName && dish.city
-      ? `${dish.userDisplayName}'s pick in ${dish.city}`
-      : "Discovered on FoodieLog");
-  const identityLine = [dish.userDisplayName, dish.culinaryRank, dish.hook]
-    .filter(Boolean)
-    .join(" · ");
+  const dish = await getPublicMapDish(id);
+  const appDeepLink = `foodielog://dish/${encodeURIComponent(id)}`;
 
-  if (dish.source === "fallback") {
-    console.log(`[WebDishShareDebug] fallback_share_rendered dish_id=${id}`);
+  if (!dish) {
+    return (
+      <main className="preview-page">
+        <section className="empty-preview">
+          <p className="eyebrow">FoodieLog</p>
+          <h1>This public dish is not available.</h1>
+          <p>It may have been removed or changed to private.</p>
+          <Link className="hero-cta" href="/">
+            Back to map
+          </Link>
+        </section>
+      </main>
+    );
   }
-  console.log("[WebDishShareDebug] hero_image_render_mode=next_image_unoptimized");
+
+  const locationLabel = [dish.city, dish.country].filter(Boolean).join(", ");
 
   return (
-    <main className="min-h-screen bg-[#0a0908] text-stone-50">
-      <article className="mx-auto flex min-h-screen w-full max-w-xl flex-col">
-        <section className="relative min-h-[62vh] overflow-hidden">
+    <main className="preview-page">
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function () {
+              var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+              if (!isIOS) return;
+              var started = Date.now();
+              window.location.href = ${JSON.stringify(appDeepLink)};
+              setTimeout(function () {
+                if (Date.now() - started < 1800) {
+                  document.documentElement.classList.add("show-store-fallback");
+                }
+              }, 1200);
+            })();
+          `,
+        }}
+      />
+
+      <Link className="back-link" href="/">
+        Map
+      </Link>
+
+      <section className="preview-card">
+        <div className="preview-image-wrap">
           <Image
-            src={dish.imageUrl}
-            alt={dish.dishName}
+            src={dish.photo_url}
+            alt={dish.dish_name}
             fill
             priority
-            sizes="100vw"
             unoptimized
-            className="absolute inset-0 h-full w-full object-cover"
+            sizes="(max-width: 800px) 100vw, 560px"
+            className="preview-image"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/90" />
+        </div>
 
-          <div className="relative flex min-h-[62vh] flex-col justify-end px-5 pb-6 pt-16 sm:px-6">
-            <div className="max-w-md">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-200/72">
-                Discovered on FoodieLog
-              </p>
-
-              <h1 className="mt-3 text-[2.35rem] leading-[0.95] font-semibold tracking-[-0.05em] text-white sm:text-5xl">
-                {dish.dishName}
-              </h1>
-
-              {(dish.restaurantName || locationLabel) && (
-                <div className="mt-4 space-y-1.5">
-                  {dish.restaurantName && (
-                    <p className="text-base font-medium text-white/90">
-                      {dish.restaurantName}
-                    </p>
-                  )}
-                  {locationLabel && (
-                    <p className="text-sm text-white/68">{locationLabel}</p>
-                  )}
-                </div>
-              )}
-            </div>
+        <div className="preview-content">
+          <p className="eyebrow">{locationLabel || "FoodieLog"}</p>
+          <h1>{dish.dish_name}</h1>
+          <p className="restaurant-name">{dish.restaurant_name}</p>
+          <div className="preview-actions">
+            <a className="hero-cta" href={appDeepLink}>
+              Open in FoodieLog
+            </a>
+            <a className="store-cta" href={APP_STORE_URL}>
+              App Store
+            </a>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="flex flex-1 flex-col gap-6 px-5 py-6 sm:px-6">
-          <div className="space-y-2">
-            <p className="text-base leading-6 text-stone-100/88">
-              {contextLine}
-            </p>
-
-            {identityLine && (
-              <p className="text-sm leading-6 text-stone-300/74">
-                {identityLine}
-              </p>
-            )}
-
-            {dish.source === "fallback" && (
-              <p className="text-sm leading-6 text-stone-400/68">
-                A dish page is ready here while live share data is still being
-                connected.
-              </p>
-            )}
-          </div>
-
-          <a
-            href={`foodielog://dish/${id}`}
-            className="inline-flex min-h-13 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f3d7a0_0%,#dfb870_100%)] px-6 text-[15px] font-semibold tracking-[-0.01em] text-[#18120d] shadow-[0_18px_42px_rgba(223,184,112,0.22)] transition-transform duration-150 hover:-translate-y-0.5"
-          >
-            Open in App
-          </a>
-        </section>
-      </article>
+      <footer className="preview-footer">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/support">Support</a>
+      </footer>
     </main>
   );
 }
