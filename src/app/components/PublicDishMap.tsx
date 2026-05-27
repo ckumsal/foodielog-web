@@ -48,9 +48,7 @@ export default function PublicDishMap({ dishes }: { dishes: PublicMapDish[] }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
   const markersRef = useRef<Marker[]>([]);
-  const [selectedDish, setSelectedDish] = useState<PublicMapDish | null>(
-    dishes[0] ?? null,
-  );
+  const [selectedDish, setSelectedDish] = useState<PublicMapDish | null>(null);
   const [boundsZoom, setBoundsZoom] = useState({
     bounds: [-180, -85, 180, 85] as [number, number, number, number],
     zoom: 2,

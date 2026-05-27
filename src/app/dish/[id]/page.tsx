@@ -14,7 +14,7 @@ type DishSharePageProps = {
 
 const APP_STORE_URL =
   process.env.NEXT_PUBLIC_APP_STORE_URL ??
-  "https://apps.apple.com/us/app/foodielog/id6736481989";
+  "https://apps.apple.com/us/app/foodielog/id6760375479";
 
 export async function generateMetadata({
   params,

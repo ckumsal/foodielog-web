@@ -1,4 +1,5 @@
 import PublicDishMap from "@/app/components/PublicDishMap";
+import ExploreMapButton from "@/app/components/ExploreMapButton";
 import { getPublicMapDishes } from "@/lib/publicMapDishes";
 
 export const dynamic = "force-dynamic";
@@ -17,9 +18,7 @@ export default async function Home() {
           FoodieLog turns favorite meals into a living map, powered only by
           public dish posts from the app.
         </p>
-        <a className="hero-cta" href="#map">
-          Explore map
-        </a>
+        <ExploreMapButton />
       </section>
 
       <footer className="site-footer">
