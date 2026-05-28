@@ -5,19 +5,8 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import maplibregl, { Map, Marker, type StyleSpecification } from "maplibre-gl";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
-import Supercluster from "supercluster";
-import type { PointFeature } from "supercluster";
+import { useEffect, useRef, useState } from "react";
 import type { PublicMapDish } from "@/lib/publicMapDishes";
-
-type DishFeatureProps = PublicMapDish & { cluster: false };
-type ClusterFeatureProps = {
-  cluster: true;
-  cluster_id: number;
-  point_count: number;
-};
-type DishFeature = PointFeature<DishFeatureProps>;
-type ClusterFeature = PointFeature<ClusterFeatureProps>;
 
 const tileStyle: StyleSpecification = {
   version: 8,
@@ -49,33 +38,6 @@ export default function PublicDishMap({ dishes }: { dishes: PublicMapDish[] }) {
   const mapRef = useRef<Map | null>(null);
   const markersRef = useRef<Marker[]>([]);
   const [selectedDish, setSelectedDish] = useState<PublicMapDish | null>(null);
-  const [boundsZoom, setBoundsZoom] = useState({
-    bounds: [-180, -85, 180, 85] as [number, number, number, number],
-    zoom: 2,
-  });
-
-  const features = useMemo<DishFeature[]>(
-    () =>
-      dishes.map((dish) => ({
-        type: "Feature",
-        properties: { ...dish, cluster: false },
-        geometry: {
-          type: "Point",
-          coordinates: [dish.longitude, dish.latitude],
-        },
-      })),
-    [dishes],
-  );
-
-  const index = useMemo(
-    () =>
-      new Supercluster<DishFeatureProps, ClusterFeatureProps>({
-        radius: 72,
-        maxZoom: 18,
-      }).load(features),
-    [features],
-  );
-
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
@@ -91,10 +53,8 @@ export default function PublicDishMap({ dishes }: { dishes: PublicMapDish[] }) {
 
     map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-left");
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
-    map.on("moveend", () => updateViewport(map));
     map.on("load", () => {
       map.resize();
-      updateViewport(map);
     });
 
     mapRef.current = map;
@@ -113,56 +73,27 @@ export default function PublicDishMap({ dishes }: { dishes: PublicMapDish[] }) {
     markersRef.current.forEach((marker) => marker.remove());
     markersRef.current = [];
 
-    const clusters = index.getClusters(boundsZoom.bounds, Math.round(boundsZoom.zoom)) as Array<
-      DishFeature | ClusterFeature
-    >;
-
-    clusters.forEach((feature) => {
-      const [lng, lat] = feature.geometry.coordinates;
-      const properties = feature.properties;
+    dishes.forEach((dish) => {
       const markerElement = document.createElement("button");
       markerElement.type = "button";
-
-      if ("point_count" in properties) {
-        markerElement.className = "cluster-pin";
-        markerElement.textContent = String(properties.point_count);
-        markerElement.ariaLabel = `${properties.point_count} dishes`;
-        markerElement.addEventListener("click", () => {
-          map.easeTo({
-            center: [lng, lat],
-            zoom: Math.min(index.getClusterExpansionZoom(properties.cluster_id), 17),
-            duration: 500,
-          });
+      markerElement.className = "photo-pin";
+      markerElement.ariaLabel = `${dish.dish_name} at ${dish.restaurant_name}`;
+      markerElement.style.backgroundImage = `url("${dish.photo_url}")`;
+      markerElement.addEventListener("click", () => {
+        setSelectedDish(dish);
+        map.easeTo({
+          center: [dish.longitude, dish.latitude],
+          zoom: Math.max(map.getZoom(), 8),
+          duration: 450,
         });
-      } else {
-        const dish = properties;
-        markerElement.className = "photo-pin";
-        markerElement.ariaLabel = `${dish.dish_name} at ${dish.restaurant_name}`;
-        markerElement.style.backgroundImage = `url("${dish.photo_url}")`;
-        markerElement.addEventListener("click", () => {
-          setSelectedDish(dish);
-          map.easeTo({
-            center: [dish.longitude, dish.latitude],
-            zoom: Math.max(map.getZoom(), 8),
-            duration: 450,
-          });
-        });
-      }
+      });
 
       const marker = new maplibregl.Marker({ element: markerElement })
-        .setLngLat([lng, lat])
+        .setLngLat([dish.longitude, dish.latitude])
         .addTo(map);
       markersRef.current.push(marker);
     });
-  }, [boundsZoom, index]);
-
-  function updateViewport(map: Map) {
-    const bounds = map.getBounds();
-    setBoundsZoom({
-      bounds: [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()],
-      zoom: map.getZoom(),
-    });
-  }
+  }, [dishes]);
 
   return (
     <div id="map" className="map-stage">
