@@ -71,41 +71,21 @@ const FALLBACK_PROFILE_SHARE_DATA = (username: string): ProfileShareData => ({
 const CULINARY_RANK_LADDER: Array<{
   title: string;
   dishes?: number;
+  restaurants?: number;
   cities?: number;
   countries?: number;
   cuisines?: number;
 }> = [
-  { title: "Food Enthusiast", dishes: 1, cities: 1 },
-  { title: "Curious Eater", dishes: 10, cities: 1, cuisines: 1 },
-  { title: "Local Explorer", dishes: 10, cities: 3 },
-  { title: "Dish Collector", dishes: 25, cities: 3 },
-  { title: "City Taster", dishes: 25, cities: 5, cuisines: 3 },
-  { title: "Cuisine Seeker", dishes: 25, cuisines: 5 },
-  { title: "Urban Foodie", dishes: 50, cities: 5 },
-  { title: "Regional Explorer", dishes: 50, cities: 10, countries: 1 },
-  { title: "Culinary Wanderer", dishes: 50, countries: 3, cuisines: 5 },
-  { title: "Traveling Taster", dishes: 50, cities: 10, countries: 3 },
-  { title: "Global Explorer", dishes: 100, countries: 5, cities: 10 },
-  { title: "Cultural Foodie", dishes: 100, cuisines: 10, countries: 5 },
-  { title: "Taste Curator", dishes: 100, cuisines: 10, cities: 25 },
-  { title: "Culinary Connoisseur", dishes: 100, cuisines: 15, countries: 10 },
-  { title: "Epicurean", dishes: 100, cities: 50, cuisines: 10 },
-  {
-    title: "Gastronomy Aficionado",
-    dishes: 100,
-    countries: 10,
-    cities: 25,
-    cuisines: 15,
-  },
-  { title: "World Traveler", countries: 25, cities: 50 },
-  { title: "Global Tastemaker", dishes: 100, countries: 25, cuisines: 15 },
-  {
-    title: "World Gourmet",
-    dishes: 100,
-    countries: 50,
-    cities: 100,
-    cuisines: 15,
-  },
+  { title: "First Taste", dishes: 1 },
+  { title: "Curious Palate", dishes: 5, restaurants: 3, cuisines: 2 },
+  { title: "Flavor Explorer", dishes: 10, restaurants: 5, cuisines: 3, cities: 2 },
+  { title: "City Taster", dishes: 20, restaurants: 10, cuisines: 5, cities: 3 },
+  { title: "Culinary Wanderer", dishes: 35, restaurants: 15, cuisines: 7, cities: 5, countries: 2 },
+  { title: "Regional Connoisseur", dishes: 50, restaurants: 25, cuisines: 10, cities: 7, countries: 3 },
+  { title: "Global Palate", dishes: 80, restaurants: 40, cuisines: 14, cities: 10, countries: 5 },
+  { title: "Passport Curator", dishes: 120, restaurants: 60, cuisines: 18, cities: 14, countries: 7 },
+  { title: "Gastronomy Insider", dishes: 170, restaurants: 85, cuisines: 22, cities: 18, countries: 10 },
+  { title: "Worldly Epicurean", dishes: 250, restaurants: 120, cuisines: 30, cities: 25, countries: 15 },
 ];
 
 export const getProfileShareDataByUsername = cache(
@@ -394,6 +374,7 @@ function evaluateCulinaryRank(stats: ProfileShareData["stats"]) {
   CULINARY_RANK_LADDER.forEach((rank) => {
     const qualifies =
       (rank.dishes === undefined || stats.dishes >= rank.dishes) &&
+      (rank.restaurants === undefined || stats.restaurants >= rank.restaurants) &&
       (rank.cities === undefined || stats.cities >= rank.cities) &&
       (rank.countries === undefined || stats.countries >= rank.countries) &&
       (rank.cuisines === undefined || stats.cuisines >= rank.cuisines);

@@ -22,7 +22,7 @@ const mockDishShareRecords: Record<string, MockDishShareRecord> = {
     imageUrl:
       "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=80",
     userDisplayName: "Cem",
-    culinaryRank: "Taste Curator",
+    culinaryRank: "Passport Curator",
     tagline: "Cem's pick in Lisbon",
     hook: "Worth remembering",
   },
