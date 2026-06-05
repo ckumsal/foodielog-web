@@ -57,7 +57,7 @@ button {
   position: fixed;
   inset: 0;
   height: 100svh;
-  background: #111;
+  background: #d8d0c3;
 }
 
 .map-canvas {
@@ -73,16 +73,16 @@ button {
   pointer-events: none;
   transition: background 180ms ease;
   background:
-    radial-gradient(circle at 68% 42%, rgba(242, 168, 75, 0.16), transparent 27%),
-    linear-gradient(90deg, rgba(11, 9, 7, 0.88), rgba(11, 9, 7, 0.2) 44%, rgba(11, 9, 7, 0.72)),
-    linear-gradient(180deg, rgba(11, 9, 7, 0.24), rgba(11, 9, 7, 0.82));
+    radial-gradient(circle at 68% 42%, rgba(242, 168, 75, 0.14), transparent 29%),
+    linear-gradient(90deg, rgba(11, 9, 7, 0.72), rgba(11, 9, 7, 0.1) 44%, rgba(11, 9, 7, 0.46)),
+    linear-gradient(180deg, rgba(11, 9, 7, 0.12), rgba(11, 9, 7, 0.52));
 }
 
 .map-explore-mode .map-vignette {
   background:
-    radial-gradient(circle at 68% 42%, rgba(242, 168, 75, 0.1), transparent 27%),
-    linear-gradient(90deg, rgba(11, 9, 7, 0.34), rgba(11, 9, 7, 0.1) 44%, rgba(11, 9, 7, 0.4)),
-    linear-gradient(180deg, rgba(11, 9, 7, 0.12), rgba(11, 9, 7, 0.52));
+    radial-gradient(circle at 68% 42%, rgba(242, 168, 75, 0.08), transparent 30%),
+    linear-gradient(90deg, rgba(11, 9, 7, 0.18), rgba(11, 9, 7, 0.04) 44%, rgba(11, 9, 7, 0.22)),
+    linear-gradient(180deg, rgba(11, 9, 7, 0.04), rgba(11, 9, 7, 0.28));
 }
 
 .hero-panel {
@@ -102,6 +102,30 @@ button {
   visibility: hidden;
   opacity: 0;
   transform: translateY(-12px);
+}
+
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 820;
+}
+
+.brand-icon,
+.map-status-icon {
+  flex: 0 0 auto;
+  border-radius: 12px;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 248, 236, 0.22),
+    0 0 0 1px rgba(255, 248, 236, 0.14);
+}
+
+.map-status-icon {
+  border-radius: 7px;
 }
 
 .eyebrow {
@@ -168,7 +192,7 @@ button {
   border-radius: 999px;
   background: rgba(13, 11, 9, 0.72);
   color: var(--muted);
-  padding: 0 14px;
+  padding: 6px 14px 6px 8px;
   font-size: 0.86rem;
   backdrop-filter: blur(18px);
 }
@@ -349,8 +373,8 @@ button {
 @media (max-width: 760px) {
   .map-vignette {
     background:
-      linear-gradient(180deg, rgba(11, 9, 7, 0.86), rgba(11, 9, 7, 0.08) 42%, rgba(11, 9, 7, 0.9)),
-      radial-gradient(circle at 50% 60%, rgba(242, 168, 75, 0.13), transparent 42%);
+      linear-gradient(180deg, rgba(11, 9, 7, 0.72), rgba(11, 9, 7, 0.04) 42%, rgba(11, 9, 7, 0.72)),
+      radial-gradient(circle at 50% 60%, rgba(242, 168, 75, 0.1), transparent 42%);
   }
 
   .hero-panel {

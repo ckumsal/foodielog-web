@@ -12,6 +12,10 @@ export default async function Home() {
       <PublicDishMap dishes={dishes} />
 
       <section className="hero-panel" aria-label="FoodieLog public map">
+        <div className="brand-lockup" aria-label="FoodieLog">
+          <img src="/app-icon.svg" alt="" width="44" height="44" className="brand-icon" />
+          <span>FoodieLog</span>
+        </div>
         <p className="eyebrow">Live public dish map</p>
         <h1>Discover the dishes people remember.</h1>
         <p className="hero-copy">

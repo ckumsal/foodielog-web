@@ -1,0 +1,58 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="170" y1="70" x2="880" y2="950" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#17120d"/>
+      <stop offset="0.45" stop-color="#070605"/>
+      <stop offset="1" stop-color="#20140a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="58%">
+      <stop offset="0" stop-color="#ffb14d" stop-opacity="0.9"/>
+      <stop offset="0.38" stop-color="#f36b16" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pin" x1="350" y1="205" x2="690" y2="770" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd15c"/>
+      <stop offset="0.34" stop-color="#ff8a1f"/>
+      <stop offset="0.72" stop-color="#f14b12"/>
+      <stop offset="1" stop-color="#b4150c"/>
+    </linearGradient>
+    <linearGradient id="pinEdge" x1="320" y1="200" x2="720" y2="820" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff0a9"/>
+      <stop offset="0.48" stop-color="#ff9e2e"/>
+      <stop offset="1" stop-color="#5e0705"/>
+    </linearGradient>
+    <linearGradient id="fork" x1="475" y1="285" x2="555" y2="610" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff6d7"/>
+      <stop offset="0.54" stop-color="#ffe08a"/>
+      <stop offset="1" stop-color="#f6a82a"/>
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="30" stdDeviation="32" flood-color="#000000" flood-opacity="0.48"/>
+    </filter>
+    <filter id="pinShadow" x="-40%" y="-30%" width="180%" height="190%">
+      <feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#000000" flood-opacity="0.55"/>
+    </filter>
+    <clipPath id="round">
+      <rect x="0" y="0" width="1024" height="1024" rx="228"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#round)">
+    <rect width="1024" height="1024" fill="url(#bg)"/>
+    <circle cx="512" cy="430" r="430" fill="url(#glow)" opacity="0.64"/>
+    <path d="M120 0H904C970.274 0 1024 53.726 1024 120V904C1024 970.274 970.274 1024 904 1024H120C53.726 1024 0 970.274 0 904V120C0 53.726 53.726 0 120 0Z" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="12"/>
+    <ellipse cx="512" cy="782" rx="210" ry="62" fill="#000" opacity="0.34"/>
+    <g filter="url(#pinShadow)">
+      <path d="M512 782C512 782 284 528 284 386C284 250 386 150 512 150C638 150 740 250 740 386C740 528 512 782 512 782Z" fill="url(#pinEdge)"/>
+      <path d="M512 732C512 732 326 514 326 390C326 278 407 193 512 193C617 193 698 278 698 390C698 514 512 732 512 732Z" fill="url(#pin)"/>
+      <ellipse cx="512" cy="382" rx="138" ry="146" fill="#ffb62e" opacity="0.52"/>
+      <ellipse cx="462" cy="313" rx="63" ry="84" fill="#fff2a6" opacity="0.28" transform="rotate(17 462 313)"/>
+    </g>
+    <g filter="url(#softShadow)">
+      <path d="M492 270C500 270 506 276 506 284V425H488V284C488 276 484 270 492 270Z" fill="url(#fork)"/>
+      <path d="M527 270C535 270 541 276 541 284V425H523V284C523 276 519 270 527 270Z" fill="url(#fork)"/>
+      <path d="M562 270C570 270 576 276 576 284V388C576 449 542 489 524 505V619C524 635 511 648 495 648C479 648 466 635 466 619V505C448 489 414 449 414 388V284C414 276 420 270 428 270C436 270 442 276 442 284V425H460V284C460 276 466 270 474 270C482 270 488 276 488 284V425H506V284C506 276 512 270 520 270C528 270 534 276 534 284V425H548V284C548 276 554 270 562 270Z" fill="url(#fork)"/>
+      <path d="M524 505H466L450 458H540L524 505Z" fill="#ffd874" opacity="0.96"/>
+    </g>
+    <path d="M160 74C160 74 256 44 420 44H862C928 44 980 96 980 162V282C905 185 763 108 600 83C386 50 230 80 160 74Z" fill="#fff" opacity="0.08"/>
+  </g>
+</svg>

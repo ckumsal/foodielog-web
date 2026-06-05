@@ -24,10 +24,10 @@ const tileStyle: StyleSpecification = {
       type: "raster",
       source: "osm",
       paint: {
-        "raster-saturation": -0.9,
-        "raster-brightness-min": 0.08,
-        "raster-brightness-max": 0.43,
-        "raster-contrast": 0.25,
+        "raster-saturation": -0.25,
+        "raster-brightness-min": 0.18,
+        "raster-brightness-max": 0.9,
+        "raster-contrast": 0.02,
       },
     },
   ],
@@ -101,6 +101,7 @@ export default function PublicDishMap({ dishes }: { dishes: PublicMapDish[] }) {
       <div className="map-vignette" />
 
       <div className="map-status">
+        <img src="/app-icon.svg" alt="" width="24" height="24" className="map-status-icon" />
         <span>{dishes.length ? `${dishes.length} public dishes` : "Waiting for public dishes"}</span>
       </div>
 

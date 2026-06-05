@@ -16,6 +16,28 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://foodielog.app"),
   title: "FoodieLog - Public Dish Map",
   description: "Explore public dishes saved by FoodieLog users around the world.",
+  applicationName: "FoodieLog",
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
+  openGraph: {
+    title: "FoodieLog - Public Dish Map",
+    description: "Explore public dishes saved by FoodieLog users around the world.",
+    url: "https://foodielog.app",
+    siteName: "FoodieLog",
+    images: [{ url: "/app-icon.svg", width: 1024, height: 1024, alt: "FoodieLog app icon" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "FoodieLog - Public Dish Map",
+    description: "Explore public dishes saved by FoodieLog users around the world.",
+    images: ["/app-icon.svg"],
+  },
 };
 
 export default function RootLayout({
